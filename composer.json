@@ -1,0 +1,26 @@
+{
+    "name": "jazzman/php-cs-fixer-rules",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "JazzMan\\PhpCsFixerRules\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Vasyl Sokolyk",
+            "email": "vsokolyk@gmail.com"
+        }
+    ],
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "optimize-autoloader": true,
+        "classmap-authoritative": true,
+        "apcu-autoloader": true
+    },
+    "require": {
+        "friendsofphp/php-cs-fixer": "@stable"
+    }
+}
