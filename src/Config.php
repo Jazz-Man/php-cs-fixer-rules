@@ -8,10 +8,6 @@ class Config extends \PhpCsFixer\Config {
 
         $this->setUsingCache(true);
         $this->setRiskyAllowed(true);
-        $this->registerCustomFixers([
-            new SpaceInsideParenthesisFixer(),
-            new BlankLineAfterClassOpeningFixer(),
-        ]);
     }
 
     public function getRules(): array {
