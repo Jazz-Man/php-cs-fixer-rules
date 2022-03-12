@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace JazzMan\PhpCsFixerRules;
 
 use PhpCsFixer\AbstractFixer;
@@ -64,21 +62,18 @@ final class Sample {
 
     /**
      * Cleanup a whitespace token.
-     *
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int                          $index
      */
-    private function fixWhitespace(Tokens $tokens, int $index) {
+    private function fixWhitespace(Tokens $tokens, int $index): void {
         $content = $tokens[$index]->getContent();
 
         // there should be two new lines
         if (2 !== substr_count($content, "\n")) {
             $ending = $this->whitespacesConfig->getLineEnding();
 
-            $emptyLines = $ending . $ending;
+            $emptyLines = $ending.$ending;
             $indent = 1 === Preg::match('/^.*\R( *)$/s', $content, $matches) ? $matches[1] : '';
 
-            $tokens[$index] = new Token([T_WHITESPACE, $emptyLines . $indent]);
+            $tokens[$index] = new Token([T_WHITESPACE, $emptyLines.$indent]);
         }
     }
 }
