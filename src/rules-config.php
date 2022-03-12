@@ -1,14 +1,17 @@
 <?php
 
-require_once __DIR__ . '/FixerName.php';
-require_once __DIR__ . '/BlankLineAfterClassOpeningFixer.php';
-require_once __DIR__ . '/SpaceInsideParenthesisFixer.php';
-require_once __DIR__ . '/Finder.php';
-require_once __DIR__ . '/Config.php';
+namespace JazzMan\PhpCsFixerRules;
 
-use JazzMan\PhpCsFixerRules\Config;
-use JazzMan\PhpCsFixerRules\Finder;
+use PhpCsFixer\ConfigInterface;
 
-$finder = Finder::getFinder(__DIR__);
+require_once __DIR__.'/FixerName.php';
 
-return (new Config())->setFinder($finder);
+require_once __DIR__.'/Finder.php';
+
+require_once __DIR__.'/Config.php';
+
+function phpCsFixerConfig(string $projectRootDirName): ConfigInterface {
+    $finder = Finder::getFinder($projectRootDirName);
+
+    return (new Config())->setFinder($finder);
+}
