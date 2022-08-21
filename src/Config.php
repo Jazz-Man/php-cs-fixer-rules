@@ -11,13 +11,15 @@ class Config extends \PhpCsFixer\Config {
     }
 
     public function getRules(): array {
-        return [
-            '@PSR12' => true,
-            ...self::getPhpCsFixerRules(),
-            ...self::getPhpCsFixerRiskyRules(),
-            ...self::getPhpRules(),
-            'phpdoc_line_span' => ['const' => 'multi'],
-        ];
+        $rules = [[]];
+
+        $rules[] = ['@PSR12' => true];
+        $rules[] = self::getPhpCsFixerRules();
+        $rules[] = self::getPhpCsFixerRiskyRules();
+        $rules[] = self::getPhpRules();
+        $rules[] = ['phpdoc_line_span' => ['const' => 'multi']];
+
+        return array_merge(...$rules);
     }
 
     private static function getPhpRules(): array {

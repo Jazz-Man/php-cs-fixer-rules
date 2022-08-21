@@ -20,7 +20,10 @@
         "classmap-authoritative": true,
         "apcu-autoloader": true
     },
-    "require-dev": {
+    "require": {
         "friendsofphp/php-cs-fixer": "@stable"
+    },
+    "scripts": {
+        "php-cs-fixer": "php-cs-fixer fix -vvv --diff"
     }
 }
