@@ -27,6 +27,10 @@ class Config extends \PhpCsFixer\Config {
             '@PHP74Migration' => true,
             '@PHP74Migration:risky' => true,
             'declare_strict_types' => false,
+
+            // fn => without curly brackets is less readable,
+            // also prevent bounding of unwanted variables for GC
+            'use_arrow_functions' => false,
         ];
     }
 
