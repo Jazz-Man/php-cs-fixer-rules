@@ -11,5 +11,5 @@ require_once __DIR__.'/Config.php';
 function phpCsFixerConfig(string $projectRootDirName): ConfigInterface {
     $finder = Finder::getFinder($projectRootDirName);
 
-    return (new Config())->setFinder($finder);
+    return ( new Config() )->setFinder($finder);
 }

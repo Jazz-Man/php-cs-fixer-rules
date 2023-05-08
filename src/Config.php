@@ -9,35 +9,28 @@ class Config extends \PhpCsFixer\Config {
         $this->setUsingCache(true);
         $this->setRiskyAllowed(true);
     }
-
     public function getRules(): array {
         $rules = [[]];
 
         $rules[] = ['@PSR12' => true];
         $rules[] = self::getPhpCsFixerRules();
         $rules[] = self::getPhpCsFixerRiskyRules();
-        $rules[] = self::getPhpRules();
-        $rules[] = ['phpdoc_line_span' => ['const' => 'multi']];
+        $rules[] = self::getPhpMigrationRules();
+        $rules[] = ['phpdoc_line_span' => true];
 
         return array_merge(...$rules);
     }
-
-    private static function getPhpRules(): array {
+    private static function getPhpMigrationRules(): array {
         return [
             '@PHP74Migration' => true,
             '@PHP74Migration:risky' => true,
             'declare_strict_types' => false,
-
-            // fn => without curly brackets is less readable,
-            // also prevent bounding of unwanted variables for GC
             'use_arrow_functions' => false,
         ];
     }
-
     private static function getPhpCsFixerRules(): array {
         return [
             '@PhpCsFixer' => true,
-            // An empty line feed must precede any configured statement.
             'blank_line_before_statement' => [
                 'statements' => [
                     'break',
@@ -65,21 +58,45 @@ class Config extends \PhpCsFixer\Config {
                     'yield_from',
                 ],
             ],
-            // Single-line comments and multi-line comments with only one line of actual content should use the `//` syntax.
-            'single_line_comment_style' => [
-                'comment_types' => [
-                    'hash',
+            'class_attributes_separation' => [
+                'elements' => [
+                    'const' => 'only_if_meta',
+                    'method' => 'only_if_meta',
+                    'property' => 'only_if_meta',
+                    'trait_import' => 'only_if_meta',
+                    'case' => 'only_if_meta',
                 ],
             ],
-            // The body of each structure MUST be enclosed by braces. Braces should be properly placed. Body of braces should be properly indented.
-            'braces' => [
-                'position_after_functions_and_oop_constructs' => 'same',
-                'allow_single_line_closure' => false,
+            'control_structure_continuation_position' => [
+                'position' => 'same_line',
             ],
-            // Class, trait and interface elements must be separated with one or none blank line.
-            'class_attributes_separation' => true,
-            'no_alternative_syntax' => [
-                'fix_non_monolithic_code' => false,
+            'curly_braces_position' => [
+                'allow_single_line_anonymous_functions' => true,
+                'allow_single_line_empty_anonymous_classes' => true,
+                'anonymous_classes_opening_brace' => 'same_line',
+                'anonymous_functions_opening_brace' => 'same_line',
+                'classes_opening_brace' => 'same_line',
+                'control_structures_opening_brace' => 'same_line',
+                'functions_opening_brace' => 'same_line',
+            ],
+            'no_alternative_syntax' => ['fix_non_monolithic_code' => false],
+            'no_extra_blank_lines' => [
+                'tokens' => [
+                    'attribute',
+                    'break',
+                    'case',
+                    'continue',
+                    'curly_brace_block',
+                    'default',
+                    'extra',
+                    'parenthesis_brace_block',
+                    'return',
+                    'square_brace_block',
+                    'switch',
+                    'throw',
+                    'use',
+                    'use_trait',
+                ],
             ],
             'phpdoc_align' => [
                 'align' => 'vertical',
@@ -87,6 +104,8 @@ class Config extends \PhpCsFixer\Config {
                     'method',
                     'param',
                     'property',
+                    'property-read',
+                    'property-write',
                     'return',
                     'throws',
                     'type',
@@ -94,9 +113,9 @@ class Config extends \PhpCsFixer\Config {
                 ],
             ],
             'phpdoc_to_comment' => false,
+            'single_line_comment_style' => ['comment_types' => ['hash']],
         ];
     }
-
     private static function getPhpCsFixerRiskyRules(): array {
         return [
             '@PhpCsFixer:risky' => true,

@@ -23,6 +23,9 @@
     "scripts": {
         "php-cs-fixer": "php-cs-fixer fix -vvv --diff"
     },
+    "require": {
+        "php": "^7.4|^8"
+    },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "@stable"
     }
