@@ -2,35 +2,33 @@
 
 namespace JazzMan\PhpCsFixerRules;
 
-class Config extends \PhpCsFixer\Config {
-    public function __construct(string $name = 'default') {
-        parent::__construct($name);
+use JazzMan\PhpCsFixerRules\Fixer\BlankLineAfterClassOpeningFixer;
+use JazzMan\PhpCsFixerRules\Fixer\SpaceInsideParenthesisFixer;
 
-        $this->setUsingCache(true);
-        $this->setRiskyAllowed(true);
+final class Config extends \PhpCsFixer\Config {
+
+    public function __construct( string $name = 'default' ) {
+        parent::__construct( $name );
+
+        $this->setUsingCache( true );
+        $this->setRiskyAllowed( true );
+
+        $this->registerCustomFixers( [
+            new SpaceInsideParenthesisFixer(),
+            new BlankLineAfterClassOpeningFixer(),
+        ] );
     }
+
     public function getRules(): array {
-        $rules = [[]];
 
-        $rules[] = ['@PSR12' => true];
-        $rules[] = self::getPhpCsFixerRules();
-        $rules[] = self::getPhpCsFixerRiskyRules();
-        $rules[] = self::getPhpMigrationRules();
-        $rules[] = ['phpdoc_line_span' => true];
-
-        return array_merge(...$rules);
-    }
-    private static function getPhpMigrationRules(): array {
         return [
-            '@PHP74Migration' => true,
-            '@PHP74Migration:risky' => true,
-            'declare_strict_types' => false,
-            'use_arrow_functions' => false,
-        ];
-    }
-    private static function getPhpCsFixerRules(): array {
-        return [
+            '@PSR12' => true,
             '@PhpCsFixer' => true,
+            '@PhpCsFixer:risky' => true,
+            '@PHP82Migration' => true,
+            '@PHP80Migration:risky' => true,
+            'WeDevs/space_inside_parenthesis' => true,
+            'WeDevs/blank_line_after_class_opening' => true,
             'blank_line_before_statement' => [
                 'statements' => [
                     'break',
@@ -58,75 +56,39 @@ class Config extends \PhpCsFixer\Config {
                     'yield_from',
                 ],
             ],
-            'class_attributes_separation' => [
-                'elements' => [
-                    'const' => 'only_if_meta',
-                    'method' => 'only_if_meta',
-                    'property' => 'only_if_meta',
-                    'trait_import' => 'only_if_meta',
-                    'case' => 'only_if_meta',
-                ],
-            ],
-            'control_structure_continuation_position' => [
-                'position' => 'same_line',
-            ],
+            'control_structure_continuation_position' => [ 'position' => 'same_line' ],
             'curly_braces_position' => [
-                'allow_single_line_anonymous_functions' => true,
-                'allow_single_line_empty_anonymous_classes' => true,
                 'anonymous_classes_opening_brace' => 'same_line',
                 'anonymous_functions_opening_brace' => 'same_line',
                 'classes_opening_brace' => 'same_line',
                 'control_structures_opening_brace' => 'same_line',
                 'functions_opening_brace' => 'same_line',
             ],
-            'no_alternative_syntax' => ['fix_non_monolithic_code' => false],
-            'no_extra_blank_lines' => [
-                'tokens' => [
-                    'attribute',
-                    'break',
-                    'case',
-                    'continue',
-                    'curly_brace_block',
-                    'default',
-                    'extra',
-                    'parenthesis_brace_block',
-                    'return',
-                    'square_brace_block',
-                    'switch',
-                    'throw',
-                    'use',
-                    'use_trait',
-                ],
-            ],
-            'phpdoc_align' => [
-                'align' => 'vertical',
-                'tags' => [
-                    'method',
-                    'param',
-                    'property',
-                    'property-read',
-                    'property-write',
-                    'return',
-                    'throws',
-                    'type',
-                    'var',
-                ],
-            ],
+            'declare_strict_types' => false,
+            'general_phpdoc_tag_rename' => [ 'fix_annotation' => true, 'fix_inline' => true ],
+            'global_namespace_import' => [ 'import_classes' => true ],
+            'heredoc_indentation' => false,
+            'no_blank_lines_after_class_opening' => false,
+            'no_extra_blank_lines' => [ 'tokens' => [ 'extra', 'parenthesis_brace_block', 'square_brace_block', 'throw', 'use' ] ],
+            'no_spaces_around_offset' => [ 'positions' => [ 'outside' ] ],
+            'no_spaces_inside_parenthesis' => false,
+            'no_superfluous_phpdoc_tags' => [ 'allow_mixed' => true, 'allow_unused_params' => true ],
+            'not_operator_with_successor_space' => true,
+            'nullable_type_declaration_for_default_null_value' => true,
+            'ordered_interfaces' => true,
+            'ordered_types' => [ 'null_adjustment' => 'always_last' ],
+            'phpdoc_line_span' => true,
+            'phpdoc_param_order' => true,
             'phpdoc_to_comment' => false,
-            'single_line_comment_style' => ['comment_types' => ['hash']],
-        ];
-    }
-    private static function getPhpCsFixerRiskyRules(): array {
-        return [
-            '@PhpCsFixer:risky' => true,
-            'error_suppression' => false,
-            'final_internal_class' => false,
-            'no_trailing_whitespace_in_string' => false,
-            'no_unreachable_default_argument_value' => false,
-            'no_unset_on_property' => false,
-            'ordered_traits' => false,
-            'strict_comparison' => false,
-            'ternary_to_elvis_operator' => false,
+            'phpdoc_to_param_type' => true,
+            'phpdoc_to_property_type' => true,
+            'phpdoc_to_return_type' => true,
+            'phpdoc_types_order' => [ 'null_adjustment' => 'always_last', 'sort_algorithm' => 'none' ],
+            'single_line_comment_style' => [ 'comment_types' => [ 'hash' ] ],
+            'single_line_empty_body' => true,
+            'single_line_throw' => true,
+            'trim_array_spaces' => false,
+            'yoda_style' => [ 'always_move_variable' => true, 'equal' => true, 'identical' => true, 'less_and_greater' => true ],
         ];
     }
 }
