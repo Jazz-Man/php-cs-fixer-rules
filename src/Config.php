@@ -57,7 +57,7 @@ final class Config extends \PhpCsFixer\Config {
                 ],
             ],
             'control_structure_continuation_position' => [ 'position' => 'same_line' ],
-            'curly_braces_position' => [
+            'braces_position' => [
                 'anonymous_classes_opening_brace' => 'same_line',
                 'anonymous_functions_opening_brace' => 'same_line',
                 'classes_opening_brace' => 'same_line',
@@ -71,7 +71,7 @@ final class Config extends \PhpCsFixer\Config {
             'no_blank_lines_after_class_opening' => false,
             'no_extra_blank_lines' => [ 'tokens' => [ 'extra', 'parenthesis_brace_block', 'square_brace_block', 'throw', 'use' ] ],
             'no_spaces_around_offset' => [ 'positions' => [ 'outside' ] ],
-            'no_spaces_inside_parenthesis' => false,
+            'spaces_inside_parentheses' => [ 'space' => 'single' ],
             'no_superfluous_phpdoc_tags' => [ 'allow_mixed' => true, 'allow_unused_params' => true ],
             'not_operator_with_successor_space' => true,
             'nullable_type_declaration_for_default_null_value' => true,
