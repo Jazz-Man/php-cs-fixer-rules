@@ -25,8 +25,8 @@ final class Config extends \PhpCsFixer\Config {
             '@PSR12' => true,
             '@PhpCsFixer' => true,
             '@PhpCsFixer:risky' => true,
-            '@PHP8x2Migration' => true,
-            '@PHP8x0Migration:risky' => true,
+            '@autoPHPMigration' => true,
+            '@autoPHPMigration:risky' => true,
             'WeDevs/space_inside_parenthesis' => true,
             'WeDevs/blank_line_after_class_opening' => true,
             'blank_line_before_statement' => [
