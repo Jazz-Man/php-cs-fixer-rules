@@ -5,7 +5,7 @@ namespace JazzMan\PhpCsFixerRules;
 final class Finder {
 
     public static function getFinder( string $projectRootDirName ): \PhpCsFixer\Finder {
-        return (new \PhpCsFixer\Finder())
+        return ( new \PhpCsFixer\Finder() )
             ->in( $projectRootDirName )
             ->ignoreDotFiles( true )
             ->ignoreVCS( true )

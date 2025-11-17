@@ -4,6 +4,7 @@ namespace JazzMan\PhpCsFixerRules;
 
 use JazzMan\PhpCsFixerRules\Fixer\BlankLineAfterClassOpeningFixer;
 use JazzMan\PhpCsFixerRules\Fixer\SpaceInsideParenthesisFixer;
+use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
 
 final class Config extends \PhpCsFixer\Config {
 
@@ -12,6 +13,7 @@ final class Config extends \PhpCsFixer\Config {
 
         $this->setUsingCache( true );
         $this->setRiskyAllowed( true );
+        $this->setParallelConfig( ParallelConfigFactory::detect() );
 
         $this->registerCustomFixers( [
             new SpaceInsideParenthesisFixer(),
@@ -25,8 +27,8 @@ final class Config extends \PhpCsFixer\Config {
             '@PSR12' => true,
             '@PhpCsFixer' => true,
             '@PhpCsFixer:risky' => true,
-            '@PHP82Migration' => true,
-            '@PHP80Migration:risky' => true,
+            '@autoPHPMigration' => true,
+            '@autoPHPMigration:risky' => true,
             'WeDevs/space_inside_parenthesis' => true,
             'WeDevs/blank_line_after_class_opening' => true,
             'blank_line_before_statement' => [
