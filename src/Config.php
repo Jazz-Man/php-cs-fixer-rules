@@ -4,6 +4,7 @@ namespace JazzMan\PhpCsFixerRules;
 
 use JazzMan\PhpCsFixerRules\Fixer\BlankLineAfterClassOpeningFixer;
 use JazzMan\PhpCsFixerRules\Fixer\SpaceInsideParenthesisFixer;
+use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
 
 final class Config extends \PhpCsFixer\Config {
 
@@ -12,6 +13,7 @@ final class Config extends \PhpCsFixer\Config {
 
         $this->setUsingCache( true );
         $this->setRiskyAllowed( true );
+        $this->setParallelConfig( ParallelConfigFactory::detect() );
 
         $this->registerCustomFixers( [
             new SpaceInsideParenthesisFixer(),
